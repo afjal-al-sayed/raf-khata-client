@@ -3,11 +3,20 @@ import useBucket from "../../hooks/useBucket";
 
 function BucketDetailsPage() {
   const { bucketId } = useParams();
-  const { bucket } = useBucket(bucketId);
+  const { bucket, loading } = useBucket(bucketId);
+
+  if (loading) {
+    return (
+      <div>
+        <h1>Loading.....</h1>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h1>This is details of bucket with id {bucketId}</h1>
-      <p>{JSON.stringify(bucket)}</p>
+      <p>Expires in: {bucket.expiresAfter}</p>
     </div>
   );
 }
