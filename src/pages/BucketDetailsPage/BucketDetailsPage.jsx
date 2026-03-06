@@ -1,9 +1,12 @@
 import { useParams } from "react-router-dom";
+import BucketDetails from "../../components/BucketDetails";
+import ErrorToast from "../../components/ErrorToast";
 import useBucket from "../../hooks/useBucket";
+import { showError } from "../../utils/uiErrorHandler";
 
 function BucketDetailsPage() {
   const { bucketId } = useParams();
-  const { bucket, loading } = useBucket(bucketId);
+  const { bucket, loading, error } = useBucket(bucketId);
 
   if (loading) {
     return (
@@ -14,10 +17,10 @@ function BucketDetailsPage() {
   }
 
   return (
-    <div>
-      <h1>This is details of bucket with id {bucketId}</h1>
-      <p>Expires in: {bucket.expiresAfter}</p>
-    </div>
+    <>
+      <ErrorToast error={error} />
+      <BucketDetails bucket={bucket} />
+    </>
   );
 }
 

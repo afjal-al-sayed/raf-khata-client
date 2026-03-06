@@ -4,6 +4,7 @@ import * as bucketService from "../api/bucketService";
 const useBucket = (bucketId) => {
   const [bucket, setBucket] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const getBucketById = async (bucketId) => {
     try {
@@ -12,6 +13,7 @@ const useBucket = (bucketId) => {
       setBucket(bucket);
     } catch (error) {
       console.error("bucketHook: ", error.message);
+      setError(error);
     } finally {
       setLoading(false);
     }
@@ -22,7 +24,7 @@ const useBucket = (bucketId) => {
     getBucketById(bucketId);
   }, [bucketId]);
 
-  return { bucket, loading };
+  return { bucket, loading, error };
 };
 
 export default useBucket;
