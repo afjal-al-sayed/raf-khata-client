@@ -3,7 +3,7 @@ import "./interceptors";
 import { responseErrorHandler } from "./interceptors";
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.0.109:3000/api/",
+  baseURL: "http://localhost:3000/api/",
   headers: {
     "Content-Type": "application/json",
   },
