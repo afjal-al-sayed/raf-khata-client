@@ -6,7 +6,9 @@ import HomePage from "./pages/HomePage/HomePage";
 function App() {
   return (
     <>
-      <h1>Navbar.</h1>
+      <div>
+        <h1>Navbar.</h1>
+      </div>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/:bucketId" element={<BucketDetailsPage />} />
