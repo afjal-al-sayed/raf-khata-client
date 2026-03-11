@@ -1,5 +1,11 @@
+import NewBucketUI from "../../components/NewBucketUI";
+
 function HomePage() {
-  return <h1>This is home page.</h1>;
+  return (
+    <div>
+      <NewBucketUI />
+    </div>
+  );
 }
 
 export default HomePage;
