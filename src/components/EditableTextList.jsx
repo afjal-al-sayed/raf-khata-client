@@ -13,7 +13,7 @@ const colors = [
   "bg-teal-50",
 ];
 
-export default function NewBucketUI() {
+export default function EditableTextList() {
   const [notes, setNotes] = useState([
     {
       id: Date.now(),
