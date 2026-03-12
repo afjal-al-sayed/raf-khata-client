@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as bucketService from "../api/bucketService";
 
-const useNewBucket = () => {
+const useNewBucket = (setSavedBucketId) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -16,6 +16,7 @@ const useNewBucket = () => {
       }));
       console.log(formattedTextList);
       const newBucket = await bucketService.createNewBucket(formattedTextList);
+      setSavedBucketId(newBucket.bucketShortId);
       console.log(newBucket);
     } catch (error) {
       console.error("newBucketHook: ", error.message);
