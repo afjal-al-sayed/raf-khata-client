@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
 
-export const showError = (error) => {
+export const showErrorToast = (error) => {
   toast.error(error.message);
 };

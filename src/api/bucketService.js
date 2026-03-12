@@ -7,6 +7,9 @@ export const getBucketById = async (bucketId) => {
 
 export const createNewBucket = async (textList) => {
   // takes a body witch includes
-  const res = await axiosInstance.post("/buckets/", body);
+  // post { textList: [ { text: "body", title: "title"} ]}
+  const res = await axiosInstance.post("/buckets/", {
+    textList: textList,
+  });
   return res.data?.data;
 };

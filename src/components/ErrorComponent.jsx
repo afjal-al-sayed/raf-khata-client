@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { showError } from "../utils/uiErrorHandler";
+import { showErrorToast } from "../utils/uiErrorHandler";
 
 const styles = {
   container: {
