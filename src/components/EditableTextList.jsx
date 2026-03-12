@@ -1,6 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { Plus, ClipboardPaste, X } from "lucide-react";
-import Loading from "./Loading";
 
 const colors = [
   "bg-rose-50",
@@ -13,7 +18,7 @@ const colors = [
   "bg-teal-50",
 ];
 
-export default function EditableTextList() {
+const EditableTextList = forwardRef(({}, ref) => {
   const [notes, setNotes] = useState([
     {
       id: Date.now(),
@@ -24,7 +29,6 @@ export default function EditableTextList() {
   ]);
 
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const addNote = () => {
     setNotes((prev) => [
@@ -63,7 +67,7 @@ export default function EditableTextList() {
     }
   };
 
-  const handleSubmit = async () => {
+  const validateNotes = () => {
     const newErrors = {};
     let firstErrorId = null;
 
@@ -84,30 +88,19 @@ export default function EditableTextList() {
 
     if (Object.keys(newErrors).length > 0) return;
 
-    apiSubmit(notes);
+    return notes;
   };
 
-  const apiSubmit = async (notes) => {
-    console.log("Submitting notes:", notes);
-
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-
-    // Example API call
-    // axios.post("/api/notes", notes)
-  };
+  useImperativeHandle(ref, () => ({
+    validateNotes,
+  }));
+  // => {} run function
+  // => ({}) return object
 
   return (
     <>
       {/* <Loading loading={loading} message="Creating Bucket..." /> */}
-      <div
-        className={`p-6 max-w-7xl mx-auto ${
-          loading ? "pointer-events-none opacity-70" : ""
-        }`}
-      >
+      <div className="p-6 max-w-7xl mx-auto">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {notes.map((note, i) => (
             <NoteCard
@@ -122,39 +115,11 @@ export default function EditableTextList() {
           ))}
 
           <AddCard addNote={addNote} />
-          <div className="col-span-full flex flex-col items-center gap-4 mt-2">
-            <button
-              onClick={handleSubmit}
-              className="px-8 py-3 rounded-xl bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium transition shadow-sm"
-            >
-              Create Bucket
-            </button>
-          </div>
         </div>
-        {loading && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-md">
-            <div className="flex flex-col items-center gap-5 px-10 py-8 rounded-2xl bg-white/70 shadow-xl backdrop-blur-xl">
-              {/* Modern spinner */}
-              <div className="relative w-14 h-14">
-                <div className="absolute inset-0 rounded-full border-4 border-indigo-200"></div>
-                <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-600 border-r-indigo-600 animate-spin"></div>
-              </div>
-
-              <div className="flex flex-col items-center gap-1">
-                <p className="text-gray-800 font-semibold">
-                  Creating New Bucket
-                </p>
-                <p className="text-sm text-gray-500 animate-pulse">
-                  Please wait...
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );
-}
+});
 
 function NoteCard({
   note,
@@ -238,3 +203,5 @@ function AddCard({ addNote }) {
     </button>
   );
 }
+
+export default EditableTextList;
