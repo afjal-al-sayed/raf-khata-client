@@ -4,9 +4,9 @@ import { useState } from "react";
 export default function TabsSlider({ tabs }) {
   const [active, setActive] = useState(0);
   return (
-    <div className="w-full max-w-7xl mx-auto mt-6">
+    <div className="w-full max-w-7xl mx-auto">
       {/* Titles */}
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-4">
         <div className="flex gap-2 p-1.5 bg-gray-100 rounded-xl">
           {tabs.map((tab, i) => (
             <button

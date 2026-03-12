@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import CreateBucketButton from "../../components/CreateBucketButton";
 import EditableTextList from "../../components/EditableTextList";
+import EditableFileList from "../../components/EditableFileList";
 import LoadingGlass from "../../components/LoadingGlass";
 import TabsSlider from "../../components/TabsSlider";
 import WelcomeBanner from "../../components/WelcomeBanner";
@@ -15,7 +16,9 @@ function HomePage() {
 
   return (
     <>
-      <div className={`${loading ? "pointer-events-none opacity-70" : ""}`}>
+      <div
+        className={`pb-24 ${loading ? "pointer-events-none opacity-70" : ""}`}
+      >
         <WelcomeBanner />
         <TabsSlider
           tabs={[
@@ -25,7 +28,7 @@ function HomePage() {
             },
             {
               title: "Files",
-              content: <h1>Here goes files</h1>,
+              content: <EditableFileList />,
             },
           ]}
         />
