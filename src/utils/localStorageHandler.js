@@ -1,4 +1,4 @@
-import CONFIG from "../config";
+import CONFIG from "./config";
 
 export const getSavedBucketId = () =>
   localStorage.getItem(CONFIG.LOCAL_STORAGE_KEYS.BUCKET_ID);
