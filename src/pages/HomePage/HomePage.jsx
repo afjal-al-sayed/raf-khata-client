@@ -8,12 +8,13 @@ import WelcomeBanner from "../../components/WelcomeBanner";
 import useNewBucket from "../../hooks/useNewBucket";
 import { showErrorToast } from "../../utils/uiErrorHandler";
 import { useNavigate } from "react-router-dom";
-import CONFIG from "../../config";
+import {
+  getSavedBucketId,
+  saveBucketId,
+} from "../../utils/localStorageHandler";
 
 function HomePage() {
-  const [savedBucketId, setSavedBucketId] = useState(
-    localStorage.getItem(CONFIG.LOCAL_STORAGE_KEYS.BUCKET_ID)
-  );
+  const [savedBucketId, setSavedBucketId] = useState(getSavedBucketId());
   const { loading, error, createNewBucket } = useNewBucket(setSavedBucketId);
   const notesRef = useRef();
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function HomePage() {
   // redirect if id exists
   useEffect(() => {
     if (savedBucketId) {
-      localStorage.setItem(CONFIG.LOCAL_STORAGE_KEYS.BUCKET_ID, savedBucketId);
+      saveBucketId(savedBucketId);
       navigate(`/${savedBucketId}`, { replace: true });
     }
   }, [savedBucketId]);

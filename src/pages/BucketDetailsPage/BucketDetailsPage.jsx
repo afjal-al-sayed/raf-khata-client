@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import BucketDetails from "../../components/BucketDetails";
-import ErrorComponent from "../../components/ErrorComponent";
+import ErrorScreen from "../../components/ErrorScreen";
 import Loading from "../../components/Loading";
 import useBucket from "../../hooks/useBucket";
 
@@ -11,7 +11,7 @@ function BucketDetailsPage() {
   return (
     <>
       <Loading loading={loading} />
-      <ErrorComponent error={error} />
+      <ErrorScreen error={error} />
       <BucketDetails bucket={bucket} />
     </>
   );

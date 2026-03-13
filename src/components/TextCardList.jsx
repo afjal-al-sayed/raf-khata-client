@@ -46,7 +46,7 @@ export default function TextCardList({ bucket }) {
   ];
 
   return (
-    <div className="w-full px-4 py-6">
+    <div className="w-full max-w-5xl mx-auto px-4 py-6">
       {/* Header */}
       <div className="mb-8 pb-4 border-b border-gray-300">
         <div className="flex items-center justify-between gap-4">

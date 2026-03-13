@@ -2,7 +2,7 @@ function WelcomeBanner() {
   return (
     <div className="w-full">
       <div className="w-full px-6 py-8 bg-gradient-to-b from-indigo-50 via-blue-50 to-white border-gray-200">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-semibold text-gray-800">
             Welcome
           </h1>
