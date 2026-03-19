@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { getFileUploadUrl, uploadFileToUrl } from "../api/fileService";
 
 const useFileUpload = ({ globalLoading, setGlobalLoading, setFiles }) => {
   const [error, setError] = useState(null);
+
   const uploadFile = async (file) => {
     if (globalLoading) return;
     try {
@@ -10,11 +12,15 @@ const useFileUpload = ({ globalLoading, setGlobalLoading, setFiles }) => {
         prev.map((f) => (f.id === file.id ? { ...f, loading: true } : f))
       );
 
-      // simulate API call
-      await new Promise((res) => setTimeout(res, 1500));
+      const { path, uploadUrl } = await getFileUploadUrl(file.name);
+      await uploadFileToUrl(file.file, uploadUrl);
+
+      //console.log(data);
 
       setFiles((prev) =>
-        prev.map((f) => (f.id === file.id ? { ...f, uploaded: true } : f))
+        prev.map((f) =>
+          f.id === file.id ? { ...f, uploaded: true, path: path } : f
+        )
       );
     } catch (err) {
       console.error(err);
