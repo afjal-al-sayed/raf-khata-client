@@ -22,7 +22,7 @@ export default function TextCardList({ bucket }) {
     "bg-cyan-50",
   ];
 
-  if (items.length === 0) return null;
+  if (!items || items?.length === 0) return null;
 
   return (
     <>

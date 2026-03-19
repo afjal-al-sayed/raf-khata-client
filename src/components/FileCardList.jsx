@@ -59,6 +59,8 @@ const FileCard = ({ file }) => {
 export default function FileCardList({ bucket }) {
   const { fileList: files } = bucket;
 
+  if (!files) return null;
+
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {files.map((file) => (
