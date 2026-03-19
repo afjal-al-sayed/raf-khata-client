@@ -30,7 +30,7 @@ function HomePage() {
     }
   }, [savedBucketId]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const notes = notesRef.current.getValidNotes();
     const files = filesRef.current.getValidFiles();
 
@@ -41,7 +41,7 @@ function HomePage() {
       return;
     }
 
-    createNewBucket(notes, files);
+    await createNewBucket(notes, files);
   };
 
   useEffect(() => {

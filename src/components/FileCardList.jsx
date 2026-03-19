@@ -24,8 +24,8 @@ const FileCard = ({ file }) => {
 
   return (
     <div className="flex items-center justify-between bg-white border border-gray-100 rounded-2xl p-4 md:p-5 shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex flex-col max-w-[70%]">
-        <span className="text-sm md:text-base lg:text-md font-semibold text-gray-800 truncate">
+      <div className="flex flex-col max-w-[60%]">
+        <span className="text-sm md:text-base lg:text-md font-semibold text-gray-800 truncate break-words break-all whitespace-pre-wrap">
           {file.name}
         </span>
         <span className="text-xs md:text-sm text-gray-500 mt-1">

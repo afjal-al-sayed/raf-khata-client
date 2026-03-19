@@ -29,7 +29,7 @@ function BucketHeader({ bucket }) {
   return (
     <>
       {/* Header */}
-      <div className="mb-8 pb-4 border-b border-gray-300">
+      <div className="pb-4 border-b border-gray-300">
         <div className="flex items-center justify-between gap-4">
           <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
             Bucket ID: {bucketShortId}
