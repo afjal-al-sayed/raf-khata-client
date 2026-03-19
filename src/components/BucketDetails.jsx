@@ -8,7 +8,7 @@ function BucketDetails({ bucket }) {
     <div className="w-full max-w-5xl mx-auto px-4 py-6">
       <BucketHeader bucket={bucket} />
       <TextCardList bucket={bucket} />
-      <FileCardList />
+      <FileCardList bucket={bucket} />
     </div>
   );
 }

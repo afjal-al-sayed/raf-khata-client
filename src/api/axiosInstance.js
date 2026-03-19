@@ -3,8 +3,8 @@ import "./interceptors";
 import { responseErrorHandler } from "./interceptors";
 
 const axiosInstance = axios.create({
-  // baseURL: "http://192.168.0.109:3000/api/",
-  baseURL: "http://localhost:3000/api/",
+  baseURL: "http://192.168.0.109:3000/api/",
+  // baseURL: "http://localhost:3000/api/",
   // baseURL: "http://10.172.1.57:3000/api/",
   //baseURL: "https://raf-khata-server.onrender.com/api/",
   headers: {
