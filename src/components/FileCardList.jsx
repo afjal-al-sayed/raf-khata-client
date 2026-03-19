@@ -10,6 +10,18 @@ const FileCard = ({ file }) => {
     if (error) showErrorToast(error);
   }, [error]);
 
+  const formatFileSize = (bytes) => {
+    if (!bytes || bytes === 0) return "0 B";
+
+    const units = ["B", "KB", "MB", "GB", "TB"];
+    const k = 1024;
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    const size = bytes / Math.pow(k, i);
+
+    return `${parseFloat(size.toFixed(2))} ${units[i]}`;
+  };
+
   return (
     <div className="flex items-center justify-between bg-white border border-gray-100 rounded-2xl p-4 md:p-5 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex flex-col max-w-[70%]">
@@ -17,7 +29,7 @@ const FileCard = ({ file }) => {
           {file.name}
         </span>
         <span className="text-xs md:text-sm text-gray-500 mt-1">
-          {file.size}
+          {formatFileSize(file.size)}
         </span>
       </div>
 
