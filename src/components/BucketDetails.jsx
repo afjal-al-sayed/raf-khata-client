@@ -1,14 +1,15 @@
+import BucketHeader from "./BucketHeader";
+import FileCardList from "./FileCardList";
 import TextCardList from "./TextCardList";
 
 function BucketDetails({ bucket }) {
   if (!bucket) return null;
   return (
-    <>
-      <div>
-        {/* <h1>This is details of bucket with id {bucket.bucketShortId}</h1> */}
-        <TextCardList bucket={bucket} />
-      </div>
-    </>
+    <div className="w-full max-w-5xl mx-auto px-4 py-6">
+      <BucketHeader bucket={bucket} />
+      <TextCardList bucket={bucket} />
+      <FileCardList />
+    </div>
   );
 }
 
