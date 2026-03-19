@@ -5,17 +5,29 @@ const useNewBucket = (setSavedBucketId) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const createNewBucket = async (textList) => {
+  const createNewBucket = async (textList, filelist) => {
     try {
-      if (!textList || textList?.length === 0) return;
       setError(null);
       setLoading(true);
+
       const formattedTextList = textList.map((item) => ({
         title: item.title,
         text: item.body,
       }));
       console.log(formattedTextList);
-      const newBucket = await bucketService.createNewBucket(formattedTextList);
+
+      const formattedFileList = filelist.map((item) => ({
+        name: item.name,
+        size: item.size,
+        path: item.path,
+      }));
+      console.log(formattedFileList);
+
+      const newBucket = await bucketService.createNewBucket(
+        formattedTextList,
+        formattedFileList
+      );
+
       setSavedBucketId(newBucket.bucketShortId);
       console.log(newBucket);
     } catch (error) {

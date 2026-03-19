@@ -17,7 +17,10 @@ function HomePage() {
   const [savedBucketId, setSavedBucketId] = useState(getSavedBucketId());
   const { loading, error, createNewBucket } = useNewBucket(setSavedBucketId);
   const notesRef = useRef();
+  const filesRef = useRef();
   const navigate = useNavigate();
+
+  const [fileUploading, setFileUploading] = useState(false);
 
   // redirect if id exists
   useEffect(() => {
@@ -27,11 +30,18 @@ function HomePage() {
     }
   }, [savedBucketId]);
 
-  const handleSubmit = () => {
-    const notes = notesRef.current.validateNotes();
-    if (!notes) return;
-    //console.log(notes);
-    createNewBucket(notes);
+  const handleSubmit = async () => {
+    const notes = notesRef.current.getValidNotes();
+    const files = filesRef.current.getValidFiles();
+
+    if (notes.length + files.length === 0) {
+      showErrorToast({
+        message: "Upload atleast 1 file or note to create a bucket.",
+      });
+      return;
+    }
+
+    await createNewBucket(notes, files);
   };
 
   useEffect(() => {
@@ -52,11 +62,20 @@ function HomePage() {
             },
             {
               title: "Files",
-              content: <EditableFileList />,
+              content: (
+                <EditableFileList
+                  ref={filesRef}
+                  fileUploading={fileUploading}
+                  setFileUploading={setFileUploading}
+                />
+              ),
             },
           ]}
         />
-        <CreateBucketButton onClick={handleSubmit} />
+        <CreateBucketButton
+          onClick={handleSubmit}
+          fileUploading={fileUploading}
+        />
       </div>
       <LoadingGlass loading={loading} />
     </>

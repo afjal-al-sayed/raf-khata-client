@@ -91,8 +91,18 @@ const EditableTextList = forwardRef(({}, ref) => {
     return notes;
   };
 
+  const getValidNotes = () => {
+    const validNotes = notes
+      .filter((item) => item.body)
+      .map((item) => ({
+        ...item,
+      }));
+    return validNotes;
+  };
+
   useImperativeHandle(ref, () => ({
-    validateNotes,
+    // validateNotes,
+    getValidNotes,
   }));
   // => {} run function
   // => ({}) return object
